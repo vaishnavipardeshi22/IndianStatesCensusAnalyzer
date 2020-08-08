@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace IndianStateCensusAnalyser
+{
+    public class StateCensusAnalyserException : Exception
+    {
+        public enum ExceptionType
+        {
+            NO_SUCH_FILE
+        }
+
+        public ExceptionType type;
+
+        public StateCensusAnalyserException(String message, ExceptionType type) : base(message)
+        {
+            this.type = type;
+        }
+    }
+}

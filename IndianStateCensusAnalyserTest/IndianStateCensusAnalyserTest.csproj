@@ -16,4 +16,8 @@
     <ProjectReference Include="..\IndianStateCensusAnalyser\IndianStateCensusAnalyser.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="resources\" />
+  </ItemGroup>
+
 </Project>
