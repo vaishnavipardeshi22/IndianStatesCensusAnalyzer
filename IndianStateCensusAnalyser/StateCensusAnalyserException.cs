@@ -9,7 +9,8 @@ namespace IndianStateCensusAnalyser
         public enum ExceptionType
         {
             NO_SUCH_FILE,
-            NO_SUCH_FILE_TYPE
+            NO_SUCH_FILE_TYPE,
+            NO_SUCH_DELIMITER
         }
 
         public ExceptionType type;

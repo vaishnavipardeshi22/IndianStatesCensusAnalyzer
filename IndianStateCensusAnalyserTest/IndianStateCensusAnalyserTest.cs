@@ -8,6 +8,7 @@ namespace IndianStateCensusAnalyserTest
         private string CSV_FILE_PATH = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/StateCensusData.csv";
         private string STATE_CENSUS_DATA_CSV_FILE_INCORRECT_PATH = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/CensusData.csv";
         private string STATE_CENSUS_DATA_CSV_INCORRECT_FILE_TYPE = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/StateCensusData.pdf";
+        private string STATE_CENSUS_ANALYSER_CSV_INCORRECT_DELIMITER_FILE_TYPE = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/StateCensusDataIncorrectDelimiter.csv";
 
         StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
 
@@ -50,5 +51,19 @@ namespace IndianStateCensusAnalyserTest
                 Assert.AreEqual(StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE_TYPE, e.type);
             }
         }
+
+        [Test]
+        public void givenIncorrectDelimiterIndianStatesCensusCSVFile_WhenUnmatch_ThenThrowCustomException()
+        {
+            try
+            {
+                stateCensusAnalyser.loadCSVDataFile(STATE_CENSUS_ANALYSER_CSV_INCORRECT_DELIMITER_FILE_TYPE);
+            }
+            catch (StateCensusAnalyserException e)
+            {
+                Assert.AreEqual(StateCensusAnalyserException.ExceptionType.NO_SUCH_DELIMITER, e.type);
+            }
+        }
+
     }
 }
