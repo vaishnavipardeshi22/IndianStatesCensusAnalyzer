@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndianStateCensusAnalyser", "IndianStateCensusAnalyser\IndianStateCensusAnalyser.csproj", "{2D35B473-235B-4815-A347-75EABA2849D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IndianStateCensusAnalyser", "IndianStateCensusAnalyser\IndianStateCensusAnalyser.csproj", "{2D35B473-235B-4815-A347-75EABA2849D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndianStateCensusAnalyserTest", "IndianStateCensusAnalyserTest\IndianStateCensusAnalyserTest.csproj", "{4CCD83BA-2DC7-4CDE-A390-9E00BFE87A8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IndianStateCensusAnalyserTest", "IndianStateCensusAnalyserTest\IndianStateCensusAnalyserTest.csproj", "{4CCD83BA-2DC7-4CDE-A390-9E00BFE87A8C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3C582C30-2A24-4B2A-851B-31E4F3916D36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

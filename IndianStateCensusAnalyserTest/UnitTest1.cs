@@ -1,18 +1,26 @@
+using IndianStateCensusAnalyser;
 using NUnit.Framework;
 
 namespace IndianStateCensusAnalyserTest
 {
     public class Tests
     {
-        [SetUp]
-        public void Setup()
+        private string CSV_FILE_PATH = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndiaStateCensusData.csv";
+
+        StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+
+        [Test]
+        public void givenIndianStatesCensusCSVFile_WhenMatchNoOfRecord_ThenReturnTrue()
         {
+            int numberOfRecords = stateCensusAnalyser.loadCSVDataFile(CSV_FILE_PATH);
+            Assert.AreEqual(29, numberOfRecords);
         }
 
         [Test]
-        public void Test1()
+        public void givenIndianStatesCensusCSVFile_WhenUnMatchNoOfRecord_ThenReturnFalse()
         {
-            Assert.Pass();
+            int numberOfRecords = stateCensusAnalyser.loadCSVDataFile(CSV_FILE_PATH);
+            Assert.AreNotEqual(30, numberOfRecords);
         }
     }
 }
