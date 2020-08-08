@@ -7,6 +7,7 @@ namespace IndianStateCensusAnalyserTest
     {
         private string CSV_FILE_PATH = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/StateCensusData.csv";
         private string STATE_CENSUS_DATA_CSV_FILE_INCORRECT_PATH = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/CensusData.csv";
+        private string STATE_CENSUS_DATA_CSV_INCORRECT_FILE_TYPE = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/StateCensusData.pdf";
 
         StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
 
@@ -34,6 +35,19 @@ namespace IndianStateCensusAnalyserTest
             catch (StateCensusAnalyserException e)
             {
                 Assert.AreEqual(StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE, e.type);
+            }
+        }
+
+        [Test]
+        public void givenIncorrectIndianStatesCensusCSVFileType_WhenUnmatch_ThenThrowCustomException()
+        {
+            try
+            {
+                stateCensusAnalyser.loadCSVDataFile(STATE_CENSUS_DATA_CSV_INCORRECT_FILE_TYPE);
+            }
+            catch (StateCensusAnalyserException e)
+            {
+                Assert.AreEqual(StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE_TYPE, e.type);
             }
         }
     }
