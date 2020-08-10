@@ -58,6 +58,15 @@ namespace IndianStateCensusAnalyser
             }
 
             string[] lines = File.ReadAllLines(csvFilePath);
+            foreach (string line in lines)
+            {
+                if (!line.Contains(','))
+                {
+                    throw new StateCensusAnalyserException("Incorrect delimiter",
+                    StateCensusAnalyserException.ExceptionType.NO_SUCH_DELIMITER);
+                }
+            }
+
             return lines.Length - 1;
         }
     }
