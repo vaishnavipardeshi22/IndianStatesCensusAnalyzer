@@ -12,6 +12,7 @@ namespace IndianStateCensusAnalyserTest
         private string STATE_CENSUS_DATA_CSV_INCORRECT_HEADER_FILE = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/StateCensusDataIncorrectHeader.csv";
 
         private string STATE_CODE_DATA_CSV_FILE_PATH = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/StateCode.csv";
+        private string STATE_CODE_DATA_CSV_FILE_INCORRECT_PATH = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/StatesCode.csv";
 
         StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
 
@@ -88,5 +89,24 @@ namespace IndianStateCensusAnalyserTest
             Assert.AreEqual(37, numberOfRecord);
         }
 
+        [Test]
+        public void givenIndianStatesCodeCSVFile_WhenUnMatchNoOfRecord_ThenReturnTrue()
+        {
+            int numberOfRecords = stateCensusAnalyser.loadCSVStateCodeDataFile(STATE_CODE_DATA_CSV_FILE_PATH);
+            Assert.AreNotEqual(30, numberOfRecords);
+        }
+
+        [Test]
+        public void givenIncorrectIndianStatesCodeCSVFile_WhenUnmatch_ThenThrowCustomException()
+        {
+            try
+            {
+                stateCensusAnalyser.loadCSVStateCodeDataFile(STATE_CENSUS_DATA_CSV_FILE_INCORRECT_PATH);
+            }
+            catch (StateCensusAnalyserException e)
+            {
+                Assert.AreEqual(StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE, e.type);
+            }
+        }
     }
 }
