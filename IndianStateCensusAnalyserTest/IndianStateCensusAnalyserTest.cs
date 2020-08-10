@@ -11,6 +11,8 @@ namespace IndianStateCensusAnalyserTest
         private string STATE_CENSUS_ANALYSER_CSV_INCORRECT_DELIMITER_FILE_TYPE = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/StateCensusDataIncorrectDelimiter.csv";
         private string STATE_CENSUS_DATA_CSV_INCORRECT_HEADER_FILE = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/StateCensusDataIncorrectHeader.csv";
 
+        private string STATE_CODE_DATA_CSV_FILE_PATH = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/StateCode.csv";
+
         StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
 
         [Test]
@@ -77,6 +79,13 @@ namespace IndianStateCensusAnalyserTest
             {
                 Assert.AreEqual(StateCensusAnalyserException.ExceptionType.NO_SUCH_HEADER, e.type);
             }
+        }
+
+        [Test]
+        public void givenIndianStatesCodeCSVFile_WhenMatchNoOfRecord_ThenReturnTrue()
+        {
+            int numberOfRecord = stateCensusAnalyser.loadCSVStateCodeDataFile(STATE_CODE_DATA_CSV_FILE_PATH);
+            Assert.AreEqual(37, numberOfRecord);
         }
 
     }

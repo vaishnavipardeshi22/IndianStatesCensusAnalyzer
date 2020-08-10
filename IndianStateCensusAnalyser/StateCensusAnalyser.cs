@@ -42,5 +42,11 @@ namespace IndianStateCensusAnalyser
 
             return lines.Length-1;
         }
+
+        public int loadCSVStateCodeDataFile(string csvFilePath)
+        {
+            string[] lines = File.ReadAllLines(csvFilePath);
+            return lines.Length - 1;
+        }
     }
 }
