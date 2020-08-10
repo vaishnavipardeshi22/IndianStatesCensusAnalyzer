@@ -4,7 +4,7 @@ using System.Text;
 
 namespace IndianStateCensusAnalyser
 {
-    class CSVStateCode
+    public class CSVStateCode
     {
         private int srNo;
         private string stateName;
