@@ -31,6 +31,15 @@ namespace IndianStateCensusAnalyser
                 }  
             }
 
+            List<CSVStateCensus> list = new List<CSVStateCensus>();
+            StreamReader reader = new StreamReader(csvFilePath);
+            string header = reader.ReadLine();
+
+            if (!header.Contains("State") || !header.Contains("Population") || !header.Contains("AreaInSqKm") || !header.Contains("DensityPerSqKm"))
+            {
+                throw new StateCensusAnalyserException("Incorrect header", StateCensusAnalyserException.ExceptionType.NO_SUCH_HEADER);
+            }
+
             return lines.Length-1;
         }
     }

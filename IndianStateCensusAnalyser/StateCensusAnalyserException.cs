@@ -10,7 +10,8 @@ namespace IndianStateCensusAnalyser
         {
             NO_SUCH_FILE,
             NO_SUCH_FILE_TYPE,
-            NO_SUCH_DELIMITER
+            NO_SUCH_DELIMITER,
+            NO_SUCH_HEADER
         }
 
         public ExceptionType type;
