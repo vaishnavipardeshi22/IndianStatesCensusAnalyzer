@@ -67,6 +67,14 @@ namespace IndianStateCensusAnalyser
                 }
             }
 
+            List<CSVStateCode> list = new List<CSVStateCode>();
+            StreamReader reader = new StreamReader(csvFilePath);
+            string header = reader.ReadLine();
+
+            if (!header.Contains("SrNo") || !header.Contains("StateName") || !header.Contains("TIN") || !header.Contains("StateCode"))
+            {
+                throw new StateCensusAnalyserException("Incorrect header", StateCensusAnalyserException.ExceptionType.NO_SUCH_HEADER);
+            }
             return lines.Length - 1;
         }
     }
