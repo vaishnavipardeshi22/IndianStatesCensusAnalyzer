@@ -51,6 +51,12 @@ namespace IndianStateCensusAnalyser
                     StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE);
             }
 
+            if (Path.GetExtension(csvFilePath) != ".csv")
+            {
+                throw new StateCensusAnalyserException("Incorrect file type",
+                    StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE_TYPE);
+            }
+
             string[] lines = File.ReadAllLines(csvFilePath);
             return lines.Length - 1;
         }
