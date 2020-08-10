@@ -7,7 +7,7 @@ namespace IndianStateCensusAnalyser
 {
     public class StateCensusAnalyser
     {
-        public int loadCSVDataFile(string csvFilePath)
+        public int loadCSVCensusDataFile(string csvFilePath)
         {
             if (!csvFilePath.Contains("StateCensusData"))
             {

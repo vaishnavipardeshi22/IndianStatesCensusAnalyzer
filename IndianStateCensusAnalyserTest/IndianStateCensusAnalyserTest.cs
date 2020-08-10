@@ -16,14 +16,14 @@ namespace IndianStateCensusAnalyserTest
         [Test]
         public void givenIndianStatesCensusCSVFile_WhenMatchNoOfRecord_ThenReturnTrue()
         {
-            int numberOfRecords = stateCensusAnalyser.loadCSVDataFile(CSV_FILE_PATH);
+            int numberOfRecords = stateCensusAnalyser.loadCSVCensusDataFile(CSV_FILE_PATH);
             Assert.AreEqual(29, numberOfRecords);
         }
 
         [Test]
         public void givenIndianStatesCensusCSVFile_WhenUnMatchNoOfRecord_ThenReturnFalse()
         {
-            int numberOfRecords = stateCensusAnalyser.loadCSVDataFile(CSV_FILE_PATH);
+            int numberOfRecords = stateCensusAnalyser.loadCSVCensusDataFile(CSV_FILE_PATH);
             Assert.AreNotEqual(30, numberOfRecords);
         }
 
@@ -32,7 +32,7 @@ namespace IndianStateCensusAnalyserTest
         {
             try
             {
-                stateCensusAnalyser.loadCSVDataFile(STATE_CENSUS_DATA_CSV_FILE_INCORRECT_PATH);
+                stateCensusAnalyser.loadCSVCensusDataFile(STATE_CENSUS_DATA_CSV_FILE_INCORRECT_PATH);
             }
             catch (StateCensusAnalyserException e)
             {
@@ -45,7 +45,7 @@ namespace IndianStateCensusAnalyserTest
         {
             try
             {
-                stateCensusAnalyser.loadCSVDataFile(STATE_CENSUS_DATA_CSV_INCORRECT_FILE_TYPE);
+                stateCensusAnalyser.loadCSVCensusDataFile(STATE_CENSUS_DATA_CSV_INCORRECT_FILE_TYPE);
             }
             catch (StateCensusAnalyserException e)
             {
@@ -58,7 +58,7 @@ namespace IndianStateCensusAnalyserTest
         {
             try
             {
-                stateCensusAnalyser.loadCSVDataFile(STATE_CENSUS_ANALYSER_CSV_INCORRECT_DELIMITER_FILE_TYPE);
+                stateCensusAnalyser.loadCSVCensusDataFile(STATE_CENSUS_ANALYSER_CSV_INCORRECT_DELIMITER_FILE_TYPE);
             }
             catch (StateCensusAnalyserException e)
             {
@@ -71,7 +71,7 @@ namespace IndianStateCensusAnalyserTest
         {
             try
             {
-                stateCensusAnalyser.loadCSVDataFile(STATE_CENSUS_DATA_CSV_INCORRECT_HEADER_FILE);
+                stateCensusAnalyser.loadCSVCensusDataFile(STATE_CENSUS_DATA_CSV_INCORRECT_HEADER_FILE);
             }
             catch (StateCensusAnalyserException e)
             {
