@@ -159,9 +159,18 @@ namespace IndianStateCensusAnalyserTest
         public void givenStateCodeData_WhenSortedCode_ThenReturnSortedStartResult()
         {
             StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
-            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusData(STATE_CODE_DATA_CSV_FILE_PATH, SORTED_FILE_PATH, 3).ToString();
-            string[] sortedData = JsonConvert.DeserializeObject<string[]>(sortedStateCensusData);
+            string sortedStateCodeData = stateCensusAnalyser.GetSortedStateWiseCensusData(STATE_CODE_DATA_CSV_FILE_PATH, SORTED_FILE_PATH, 3).ToString();
+            string[] sortedData = JsonConvert.DeserializeObject<string[]>(sortedStateCodeData);
             Assert.AreEqual("3,Andhra Pradesh New,37,AD", sortedData[0]);
+        }
+
+        [Test]
+        public void givenStateCodeData_WhenSortedCode_ThenReturnSortedLastResult()
+        {
+            StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+            string sortedStateCodeData = stateCensusAnalyser.GetSortedStateWiseCensusData(STATE_CODE_DATA_CSV_FILE_PATH, SORTED_FILE_PATH, 3).ToString();
+            string[] sortedData = JsonConvert.DeserializeObject<string[]>(sortedStateCodeData);
+            Assert.AreEqual("37,West Bengal,19,WB", sortedData[sortedData.Length - 1]);
         }
     }
 }
