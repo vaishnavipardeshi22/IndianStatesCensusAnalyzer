@@ -141,7 +141,7 @@ namespace IndianStateCensusAnalyserTest
         public void GivenIndianCensusData_WhenSortedState_thenReturnSortedStartResult()
         {
             StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
-            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusData(STATE_CENSUS_DATA_CSV_FILE_PATH, SORTED_FILE_PATH).ToString();
+            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusData(STATE_CENSUS_DATA_CSV_FILE_PATH, SORTED_FILE_PATH, 0).ToString();
             string[] sortedData = JsonConvert.DeserializeObject<string[]>(sortedStateCensusData);
             Assert.AreEqual("Andhra Pradesh,49386799,162968,303", sortedData[0]);
         }
@@ -150,9 +150,18 @@ namespace IndianStateCensusAnalyserTest
         public void GivenIndianCensusData_WhenSortedState_thenReturnSortedLastResult()
         {
             StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
-            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusData(STATE_CENSUS_DATA_CSV_FILE_PATH, SORTED_FILE_PATH).ToString();
+            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusData(STATE_CENSUS_DATA_CSV_FILE_PATH, SORTED_FILE_PATH, 0).ToString();
             string[] sortedData = JsonConvert.DeserializeObject<string[]>(sortedStateCensusData);
             Assert.AreEqual("West Bengal,91347736,88752,1029", sortedData[sortedData.Length - 1]);
+        }
+
+        [Test]
+        public void givenStateCodeData_WhenSortedCode_ThenReturnSortedStartResult()
+        {
+            StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusData(STATE_CODE_DATA_CSV_FILE_PATH, SORTED_FILE_PATH, 3).ToString();
+            string[] sortedData = JsonConvert.DeserializeObject<string[]>(sortedStateCensusData);
+            Assert.AreEqual("3,Andhra Pradesh New,37,AD", sortedData[0]);
         }
     }
 }
