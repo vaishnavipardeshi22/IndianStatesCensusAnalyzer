@@ -9,7 +9,8 @@ namespace IndianStateCensusAnalyser
 {
     public class StateCensusAnalyser : ICSVBuilder
     {
-        List<string> lines = new List<string>();
+        Dictionary<int, string> dataMap = new Dictionary<int, string>();
+        int key = 0;
 
         public delegate object CSVData(string csvFilePath, string header);
         public object loadCSVDataFile(string csvFilePath, string header)
@@ -26,9 +27,11 @@ namespace IndianStateCensusAnalyser
                     StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE_TYPE);
             }
 
-            lines = File.ReadAllLines(csvFilePath).ToList();
+            string[] lines = File.ReadAllLines(csvFilePath);
             foreach (string line in lines)
             {
+                key++;
+                dataMap.Add(key, line);
                 if (!line.Contains(','))
                 {
                     throw new StateCensusAnalyserException("Incorrect delimiter",
@@ -38,24 +41,26 @@ namespace IndianStateCensusAnalyser
 
             if (lines[0] != header)
             {
-                throw new StateCensusAnalyserException("Incorrect header", StateCensusAnalyserException.ExceptionType.NO_SUCH_HEADER);
+                throw new StateCensusAnalyserException("Incorrect header", 
+                    StateCensusAnalyserException.ExceptionType.NO_SUCH_HEADER);
             }
 
-            return lines.Skip(1).ToList();
+            return dataMap.Skip(1).ToDictionary(field => field.Key, field => field.Value);
         }
         
-        public object GetSortedStateWiseCensusData(string csvFilePath, string sortedFilePath, int headerField)
+        public object GetSortedStateWiseCensusData(string csvFilePath, string header, int headerField)
         {
-            string[] lines = File.ReadAllLines(csvFilePath);
-            var data = lines.Skip(1);
+            Dictionary<int, string> dataMap = (Dictionary<int, string>)loadCSVDataFile(csvFilePath, header);
+            string[] lines = dataMap.Values.ToArray();
+            var data = lines;
 
             var sortedData = from line in data
                              let field = line.Split(',')
                              orderby field[headerField]
                              select line;
 
-            File.WriteAllLines(sortedFilePath, lines.Take(1).Concat(sortedData.ToArray()));
-            List<string> sortedFile = sortedData.ToList<string>();
+            File.WriteAllLines(header, lines.Take(1).Concat(sortedData.ToArray()));
+            List<string> sortedFile = sortedData.ToList();
 
             return JsonConvert.SerializeObject(sortedFile);
         }
