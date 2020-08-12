@@ -183,12 +183,48 @@ namespace IndianStateCensusAnalyserTest
         }
 
         [Test]
-        public void GivenStateCensusData_WhenSortedByPopulationDensity_ThenReturnSortedMostPopulatedResult()
+        public void GivenStateCensusData_WhenSortedByPopulation_ThenReturnSortedLeastPopulatedResult()
+        {
+            StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CENSUS_DATA_CSV_FILE_PATH, INDIAN_CENSUS_HEADER, "population", "DESC").ToString();
+            CSVStateCensus[] sortedData = JsonConvert.DeserializeObject<CSVStateCensus[]>(sortedStateCensusData);
+            Assert.AreEqual("Sikkim", sortedData[^1].state);
+        }
+
+        [Test]
+        public void GivenStateCensusData_WhenSortedByPopulationDensity_ThenReturnSortedMostPopulatedDensityResult()
         {
             StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
             string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CENSUS_DATA_CSV_FILE_PATH, INDIAN_CENSUS_HEADER, "populationDensity", "ASC").ToString();
             CSVStateCensus[] sortedData = JsonConvert.DeserializeObject<CSVStateCensus[]>(sortedStateCensusData);
             Assert.AreEqual("Bihar", sortedData[0].state);
+        }
+
+        [Test]
+        public void GivenStateCensusData_WhenSortedByPopulationDensity_ThenReturnSortedLeastPopulatedDensityResult()
+        {
+            StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CENSUS_DATA_CSV_FILE_PATH, INDIAN_CENSUS_HEADER, "populationDensity", "DESC").ToString();
+            CSVStateCensus[] sortedData = JsonConvert.DeserializeObject<CSVStateCensus[]>(sortedStateCensusData);
+            Assert.AreEqual("Mizoram", sortedData[^1].state);
+        }
+
+        [Test]
+        public void GivenStateCensusData_WhenSortedByArea_ThenReturnSortedMostAreaResult()
+        {
+            StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CENSUS_DATA_CSV_FILE_PATH, INDIAN_CENSUS_HEADER, "area", "ASC").ToString();
+            CSVStateCensus[] sortedData = JsonConvert.DeserializeObject<CSVStateCensus[]>(sortedStateCensusData);
+            Assert.AreEqual("Rajasthan", sortedData[0].state);
+        }
+
+        [Test]
+        public void GivenStateCensusData_WhenSortedByArea_ThenReturnSortedLeastAreaResult()
+        {
+            StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CENSUS_DATA_CSV_FILE_PATH, INDIAN_CENSUS_HEADER, "area", "DESC").ToString();
+            CSVStateCensus[] sortedData = JsonConvert.DeserializeObject<CSVStateCensus[]>(sortedStateCensusData);
+            Assert.AreEqual("Arunachal Pradesh", sortedData[^1].state);
         }
     }
 }
