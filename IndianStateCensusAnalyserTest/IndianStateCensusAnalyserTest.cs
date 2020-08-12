@@ -181,5 +181,14 @@ namespace IndianStateCensusAnalyserTest
             CSVStateCensus[] sortedData = JsonConvert.DeserializeObject<CSVStateCensus[]>(sortedStateCensusData);
             Assert.AreEqual("Uttar Pradesh", sortedData[0].state);
         }
+
+        [Test]
+        public void GivenStateCensusData_WhenSortedByPopulationDensity_ThenReturnSortedMostPopulatedResult()
+        {
+            StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CENSUS_DATA_CSV_FILE_PATH, INDIAN_CENSUS_HEADER, "populationDensity", "ASC").ToString();
+            CSVStateCensus[] sortedData = JsonConvert.DeserializeObject<CSVStateCensus[]>(sortedStateCensusData);
+            Assert.AreEqual("Bihar", sortedData[0].state);
+        }
     }
 }

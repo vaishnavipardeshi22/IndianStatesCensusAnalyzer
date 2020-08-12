@@ -73,6 +73,7 @@ namespace IndianStateCensusAnalyser
                 case "state": return censusDataList.OrderBy(field => field.state).ToList();
                 case "area": return censusDataList.OrderBy(field => field.areaInSqKm).ToList();
                 case "population": return censusDataList.OrderBy(field => field.population).ToList();
+                case "populationDensity": return censusDataList.OrderBy(field => field.densityPerSqKm).ToList();
                 default: return censusDataList.OrderBy(field => field.tin).ToList();
             }
         }
