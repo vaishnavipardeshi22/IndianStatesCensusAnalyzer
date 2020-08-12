@@ -37,10 +37,11 @@ namespace IndianStateCensusAnalyser
 
                 string[] field = line.Split(',');
 
-                if (csvFilePath.Contains("StateCensusData.csv"))
-                    dataMap.Add(field[0], new CensusDTO(new CSVStateCensus(field[0], field[1], field[2], field[3])));
                 if (csvFilePath.Contains("StateCode.csv"))
                     dataMap.Add(field[1], new CensusDTO(new CSVStateCode(field[0], field[1], field[2], field[3])));
+                if (csvFilePath.Contains("StateCensusData.csv"))
+                    dataMap.Add(field[0], new CensusDTO(new CSVStateCensus(field[0], field[1], field[2], field[3])));
+                
             }
 
             if (lines[0] != header)
@@ -52,11 +53,14 @@ namespace IndianStateCensusAnalyser
             return dataMap.Skip(1).ToDictionary(field => field.Key, field => field.Value);
         }
 
-        public object GetSortedStateWiseCensusDataInJsonFormat(string csvFilePath, string header, string headerField)
+        public object GetSortedStateWiseCensusDataInJsonFormat(string csvFilePath, string header, string headerField, string sortBy)
         {
             var data = (Dictionary<string, CensusDTO>)loadCSVDataFile(csvFilePath, header);
             List<CensusDTO> censusDataList = data.Values.ToList();
             List<CensusDTO> sortedList = getSortedData(headerField, censusDataList);
+
+            if (sortBy.Contains("DESC")) sortedList.Reverse();
+
             return JsonConvert.SerializeObject(sortedList);
         }
 

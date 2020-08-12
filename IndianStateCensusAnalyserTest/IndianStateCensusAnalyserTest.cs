@@ -141,36 +141,45 @@ namespace IndianStateCensusAnalyserTest
         {
             StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
            
-            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CENSUS_DATA_CSV_FILE_PATH, INDIAN_CENSUS_HEADER, "state").ToString();
+            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CENSUS_DATA_CSV_FILE_PATH, INDIAN_CENSUS_HEADER, "state", "ASC").ToString();
             CSVStateCensus[] sortedData = JsonConvert.DeserializeObject<CSVStateCensus[]>(sortedStateCensusData);
-            Assert.AreEqual("Andhra Pradesh,49386799,162968,303", sortedData[0]);
+            Assert.AreEqual("Andhra Pradesh", sortedData[0].state);
         }
 
         [Test]
         public void GivenIndianCensusData_WhenSortedState_thenReturnSortedLastResult()
         {
             StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
-            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CENSUS_DATA_CSV_FILE_PATH, INDIAN_CENSUS_HEADER, "state").ToString();
+            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CENSUS_DATA_CSV_FILE_PATH, INDIAN_CENSUS_HEADER, "state",  "DESC").ToString();
             CSVStateCensus[] sortedData = JsonConvert.DeserializeObject<CSVStateCensus[]>(sortedStateCensusData);
-            Assert.AreEqual("West Bengal,91347736,88752,1029", sortedData[sortedData.Length - 1]);
+            Assert.AreEqual("West Bengal", sortedData[^1].state);
         }
 
         [Test]
-        public void givenStateCodeData_WhenSortedCode_ThenReturnSortedStartResult()
+        public void GivenStateCodeData_WhenSortedCode_ThenReturnSortedStartResult()
         {
             StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
-            string sortedStateCodeData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CODE_DATA_CSV_FILE_PATH, INDIAN_STATE_CODE_HEADER, "stateCode").ToString();
+            string sortedStateCodeData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CODE_DATA_CSV_FILE_PATH, INDIAN_STATE_CODE_HEADER, "stateCode", "ASC").ToString();
             CSVStateCode[] sortedData = JsonConvert.DeserializeObject<CSVStateCode[]>(sortedStateCodeData);
-            Assert.AreEqual("3,Andhra Pradesh New,37,AD", sortedData[0]);
+            Assert.AreEqual("AD", sortedData[0].stateCode);
         }
 
         [Test]
-        public void givenStateCodeData_WhenSortedCode_ThenReturnSortedLastResult()
+        public void GivenStateCodeData_WhenSortedCode_ThenReturnSortedLastResult()
         {
             StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
-            string sortedStateCodeData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CODE_DATA_CSV_FILE_PATH, INDIAN_STATE_CODE_HEADER, "stateCode").ToString();
+            string sortedStateCodeData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CODE_DATA_CSV_FILE_PATH, INDIAN_STATE_CODE_HEADER, "stateCode", "DESC").ToString();
             CSVStateCode[] sortedData = JsonConvert.DeserializeObject<CSVStateCode[]>(sortedStateCodeData);
-            Assert.AreEqual("37,West Bengal,19,WB", sortedData[sortedData.Length - 1]);
+            Assert.AreEqual("WB", sortedData[^1].stateCode);
+        }
+
+        [Test]
+        public void GivenStateCensusData_WhenSortedByPopulation_ThenReturnSortedMostPopulatedResult()
+        {
+            StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
+            string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CENSUS_DATA_CSV_FILE_PATH, INDIAN_CENSUS_HEADER, "population", "ASC").ToString();
+            CSVStateCensus[] sortedData = JsonConvert.DeserializeObject<CSVStateCensus[]>(sortedStateCensusData);
+            Assert.AreEqual("Uttar Pradesh", sortedData[0].state);
         }
     }
 }
