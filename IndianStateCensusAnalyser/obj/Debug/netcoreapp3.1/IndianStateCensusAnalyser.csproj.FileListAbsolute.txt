@@ -11,5 +11,5 @@ C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyser\
 C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyser\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyser.pdb
 C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyser\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyser.genruntimeconfig.cache
 C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyser\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
-C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyser\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyser.csproj.CoreCompileInputs.cache
 C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyser\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyser.csproj.CopyComplete
+C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyser\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyser.csproj.CoreCompileInputs.cache

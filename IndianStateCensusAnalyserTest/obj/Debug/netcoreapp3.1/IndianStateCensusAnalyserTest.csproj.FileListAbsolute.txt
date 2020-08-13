@@ -92,8 +92,10 @@ C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyserT
 C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyserTest\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyserTest.csprojAssemblyReference.cache
 C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyserTest\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyserTest.AssemblyInfoInputs.cache
 C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyserTest\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyserTest.AssemblyInfo.cs
-C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyserTest\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyserTest.csproj.CoreCompileInputs.cache
 C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyserTest\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyserTest.csproj.CopyComplete
 C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyserTest\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyserTest.dll
 C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyserTest\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyserTest.pdb
 C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyserTest\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyserTest.genruntimeconfig.cache
+C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyserTest\bin\Debug\netcoreapp3.1\testhost.exe
+C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyserTest\bin\Debug\netcoreapp3.1\nunit.engine.core.dll
+C:\Users\admin\source\repos\IndianStateCensusAnalyser\IndianStateCensusAnalyserTest\obj\Debug\netcoreapp3.1\IndianStateCensusAnalyserTest.csproj.CoreCompileInputs.cache

@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "y7vUR74ZGqUsE23E+v1gvpgeTK93yyxeAn1nrzxgIV3lrGCw/X9Sjw28L640KlBWV5FROKP3tOgr3EoycAymog==",
+  "dgSpecHash": "fjzoxLKsOqnHVe+HzWTFRCzH1P/G/9750+mZmIazchJi4DEREp9z6yWqXwm64T4UIXvnb0tZ65MaQEgQji3pyA==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\IndianStateCensusAnalyser\\IndianStateCensusAnalyser\\IndianStateCensusAnalyser.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512"
+    "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\stylecop.analyzers\\1.1.118\\stylecop.analyzers.1.1.118.nupkg.sha512"
   ],
   "logs": []
 }

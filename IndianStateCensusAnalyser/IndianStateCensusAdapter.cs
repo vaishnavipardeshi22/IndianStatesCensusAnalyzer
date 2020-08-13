@@ -28,7 +28,7 @@ namespace IndianStateCensusAnalyser
                     dataMap.Add(field[0], new CensusDTO(new CSVStateCensus(field[0], field[1], field[2], field[3])));
             }
 
-            return dataMap.Skip(1).ToDictionary(field => field.Key, field => field.Value);
+            return dataMap.Skip(0).ToDictionary(field => field.Key, field => field.Value);
         }
     }
 }
