@@ -7,55 +7,22 @@ using Newtonsoft.Json;
 
 namespace IndianStateCensusAnalyser
 {
-    public class StateCensusAnalyser : ICSVBuilder
+    public class StateCensusAnalyser
     {
-        Dictionary<string, CensusDTO> dataMap = new Dictionary<string, CensusDTO>();
-
-        public delegate object CSVData(string csvFilePath, string header);
-        public object loadCSVDataFile(string csvFilePath, string header)
+        public enum Country
         {
-            if (!File.Exists(csvFilePath))
-            {
-                throw new StateCensusAnalyserException("File not found",
-                    StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE);
-            }
-           
-            if (Path.GetExtension(csvFilePath) != ".csv")
-            {
-                throw new StateCensusAnalyserException("Incorrect file type",
-                    StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE_TYPE);
-            }
-
-            string[] lines = File.ReadAllLines(csvFilePath);
-            foreach (string line in lines)
-            {
-                if (!line.Contains(','))
-                {
-                    throw new StateCensusAnalyserException("Incorrect delimiter",
-                    StateCensusAnalyserException.ExceptionType.NO_SUCH_DELIMITER);
-                }
-
-                string[] field = line.Split(',');
-
-                if (csvFilePath.Contains("StateCode.csv"))
-                    dataMap.Add(field[1], new CensusDTO(new CSVStateCode(field[0], field[1], field[2], field[3])));
-                if (csvFilePath.Contains("StateCensusData.csv"))
-                    dataMap.Add(field[0], new CensusDTO(new CSVStateCensus(field[0], field[1], field[2], field[3])));
-                
-            }
-
-            if (lines[0] != header)
-            {
-                throw new StateCensusAnalyserException("Incorrect header", 
-                    StateCensusAnalyserException.ExceptionType.NO_SUCH_HEADER);
-            }
-
-            return dataMap.Skip(1).ToDictionary(field => field.Key, field => field.Value);
+            INDIA, US
         }
 
-        public object GetSortedStateWiseCensusDataInJsonFormat(string csvFilePath, string header, string headerField, string sortBy)
+        public Dictionary<string, CensusDTO> loadCSVDataFile(Country country, string csvFilePath, string headers)
         {
-            var data = (Dictionary<string, CensusDTO>)loadCSVDataFile(csvFilePath, header);
+            Dictionary<string, CensusDTO> dataMap = new CensusAdapterFactory().LoadCSVCensusData(country, csvFilePath, headers);
+            return dataMap;
+        }
+
+        public object GetSortedStateWiseCensusDataInJsonFormat(Country country, string csvFilePath, string header, string headerField, string sortBy)
+        {
+            var data = (Dictionary<string, CensusDTO>)loadCSVDataFile(country, csvFilePath, header);
             List<CensusDTO> censusDataList = data.Values.ToList();
             List<CensusDTO> sortedList = getSortedData(headerField, censusDataList);
 
@@ -76,43 +43,6 @@ namespace IndianStateCensusAnalyser
                 "populationDensity" => censusDataList.OrderBy(field => field.densityPerSqKm).ToList(),
                 _ => censusDataList.OrderBy(field => field.tin).ToList(),
             };
-        }
-
-        public object LoadUSCSVDataFile(string csvFilePath, string header)
-        {
-            if (!File.Exists(csvFilePath))
-            {
-                throw new StateCensusAnalyserException("File not found",
-                    StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE);
-            }
-
-            if (Path.GetExtension(csvFilePath) != ".csv")
-            {
-                throw new StateCensusAnalyserException("Incorrect file type",
-                    StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE_TYPE);
-            }
-
-            string[] lines = File.ReadAllLines(csvFilePath);
-            foreach (string line in lines)
-            {
-                if (!line.Contains(','))
-                {
-                    throw new StateCensusAnalyserException("Incorrect delimiter",
-                    StateCensusAnalyserException.ExceptionType.NO_SUCH_DELIMITER);
-                }
-
-                string[] field = line.Split(',');
-
-                dataMap.Add(field[1], new CensusDTO(new CSVUSCensus(field[0], field[1], field[2], field[3], field[4], field[5], field[6], field[7], field[8])));
-            }
-
-            if (lines[0] != header)
-            {
-                throw new StateCensusAnalyserException("Incorrect header",
-                    StateCensusAnalyserException.ExceptionType.NO_SUCH_HEADER);
-            }
-
-            return dataMap.Skip(1).ToDictionary(field => field.Key, field => field.Value);
         }
     }
 }
