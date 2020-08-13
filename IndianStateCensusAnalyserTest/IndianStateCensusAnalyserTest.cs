@@ -20,12 +20,19 @@ namespace IndianStateCensusAnalyserTest
         private string STATE_CODE_DATA_CSV_FILE_INCORRECT_DELIMITER = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/StateCodeIncorrectDelimiter.csv";
         private string STATE_CODE_DATA_CSV_FILE_INCORRECT_HEADER = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/StateCodeIncorrectHeader.csv";
 
+        private string US_CENSUS_DATA_CSV_FILE_PATH = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/USCensusData.csv";
+        private string US_CENSUS_DATA_CSV_FILE_INCORRECT_PATH = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/USData.csv";
+        private string US_CENSUS_DATA_CSV_INCORRECT_FILE_TYPE = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/USCensusData.txt";
+        private string US_CENSUS_DATA_CSV_INCORRECT_DELIMITER = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/USCensusDataIncorrectDelimiter.csv";
+        private string US_CENSUS_DATA_CSV_INCORRECT_HEADER = "C:/Users/admin/source/repos/IndianStateCensusAnalyser/IndianStateCensusAnalyserTest/resources/USCensusDataIncorrectHeader.csv";
+
         private string INDIAN_CENSUS_HEADER = "State,Population,AreaInSqKm,DensityPerSqKm";
         private string INDIAN_STATE_CODE_HEADER = "SrNo,StateName,TIN,StateCode";
-
+        private string US_CENSUS_HEADER = "State Id,State,Population,Housing units,Total area,Water area,Land area,Population Density,Housing Density";
         
         CSVBuilderFactory csvFactory = new CSVBuilderFactory();
         Dictionary<string, CensusDTO> numberOfRecords = new Dictionary<string, CensusDTO>();
+        Dictionary<string, CensusDTO> totalRecords = new Dictionary<string, CensusDTO>();
         CSVData csvData;
 
         [Test]
@@ -34,7 +41,9 @@ namespace IndianStateCensusAnalyserTest
             StateCensusAnalyser stateCensusAnalyser = (StateCensusAnalyser)csvFactory.createCSVBuilder();
             csvData = new CSVData(stateCensusAnalyser.loadCSVDataFile);
             numberOfRecords = (Dictionary<string, CensusDTO>)csvData(STATE_CENSUS_DATA_CSV_FILE_PATH, INDIAN_CENSUS_HEADER);
+            totalRecords = (Dictionary<string, CensusDTO>)csvData(STATE_CODE_DATA_CSV_FILE_PATH, INDIAN_STATE_CODE_HEADER);
             Assert.AreEqual(29, numberOfRecords.Count);
+            Assert.AreEqual(37, totalRecords.Count);
         }
 
         [Test]
@@ -217,7 +226,7 @@ namespace IndianStateCensusAnalyserTest
             CSVStateCensus[] sortedData = JsonConvert.DeserializeObject<CSVStateCensus[]>(sortedStateCensusData);
             Assert.AreEqual("Rajasthan", sortedData[0].state);
         }
-
+        
         [Test]
         public void GivenStateCensusData_WhenSortedByArea_ThenReturnSortedLeastAreaResult()
         {
@@ -225,6 +234,51 @@ namespace IndianStateCensusAnalyserTest
             string sortedStateCensusData = stateCensusAnalyser.GetSortedStateWiseCensusDataInJsonFormat(STATE_CENSUS_DATA_CSV_FILE_PATH, INDIAN_CENSUS_HEADER, "area", "DESC").ToString();
             CSVStateCensus[] sortedData = JsonConvert.DeserializeObject<CSVStateCensus[]>(sortedStateCensusData);
             Assert.AreEqual("Arunachal Pradesh", sortedData[^1].state);
+        }
+
+        [Test]
+        public void GivenUSCensusCSVFile_WhenUnMatchNoOfRecord_ThenReturnFalse()
+        {
+            StateCensusAnalyser stateCensusAnalyser = (StateCensusAnalyser)csvFactory.createCSVBuilder();
+            csvData = new CSVData(stateCensusAnalyser.LoadUSCSVDataFile);
+            numberOfRecords = (Dictionary<string, CensusDTO>)csvData(US_CENSUS_DATA_CSV_FILE_PATH, US_CENSUS_HEADER);
+            Assert.AreNotEqual(51, numberOfRecords.Count);
+        }
+
+        [Test]
+        public void GivenIncorrectUSCensusCSVFile_WhenUnmatch_ThenThrowCustomException()
+        {
+            StateCensusAnalyser stateCensusAnalyser = (StateCensusAnalyser)csvFactory.createCSVBuilder();
+            csvData = new CSVData(stateCensusAnalyser.LoadUSCSVDataFile);
+            var result = Assert.Throws<StateCensusAnalyserException>(() => csvData(US_CENSUS_DATA_CSV_FILE_INCORRECT_PATH, US_CENSUS_HEADER));
+            Assert.AreEqual(StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE, result.type);
+        }
+
+        [Test]
+        public void GivenIncorrectUSCensusCSVFileType_WhenUnmatch_ThenThrowCustomException()
+        {
+            StateCensusAnalyser stateCensusAnalyser = (StateCensusAnalyser)csvFactory.createCSVBuilder();
+            csvData = new CSVData(stateCensusAnalyser.LoadUSCSVDataFile);
+            var result = Assert.Throws<StateCensusAnalyserException>(() => csvData(US_CENSUS_DATA_CSV_INCORRECT_FILE_TYPE, US_CENSUS_HEADER));
+            Assert.AreEqual(StateCensusAnalyserException.ExceptionType.NO_SUCH_FILE_TYPE, result.type);
+        }
+        
+        [Test]
+        public void GivenIncorrectDelimiterUSCensusCSVFile_WhenUnmatch_ThenThrowCustomException()
+        {
+            StateCensusAnalyser stateCensusAnalyser = (StateCensusAnalyser)csvFactory.createCSVBuilder();
+            csvData = new CSVData(stateCensusAnalyser.LoadUSCSVDataFile);
+            var result = Assert.Throws<StateCensusAnalyserException>(() => csvData(US_CENSUS_DATA_CSV_INCORRECT_DELIMITER, US_CENSUS_HEADER));
+            Assert.AreEqual(StateCensusAnalyserException.ExceptionType.NO_SUCH_DELIMITER, result.type);
+        }
+
+        [Test]
+        public void GivenIncorrectHeaderUSCensusCSVFile_WhenUnmatch_ThenThrowCustomException()
+        {
+            StateCensusAnalyser stateCensusAnalyser = (StateCensusAnalyser)csvFactory.createCSVBuilder();
+            csvData = new CSVData(stateCensusAnalyser.LoadUSCSVDataFile);
+            var result = Assert.Throws<StateCensusAnalyserException>(() => csvData(US_CENSUS_DATA_CSV_INCORRECT_HEADER, US_CENSUS_HEADER));
+            Assert.AreEqual(StateCensusAnalyserException.ExceptionType.NO_SUCH_HEADER, result.type);
         }
     }
 }
